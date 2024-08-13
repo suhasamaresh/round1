@@ -65,7 +65,7 @@ const FlipCardPage: React.FC = () => {
               width="300px"
               height="500px"
             />
-          ))}
+          )): null}
         </motion.div>
       </motion.div>
       <div className="mt-5 flex justify-between">
