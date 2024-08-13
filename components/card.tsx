@@ -57,7 +57,7 @@ const FlipCardPage: React.FC = () => {
     <div className='xl:ml-[200px] xl:mr-[200px] ml-10 mr-10 pb-20 lg:ml-[150px] lg:mr-[150px]'>
       <motion.div ref={carousel} className="carousel" style={{ overflow: "hidden", display: "flex" }}>
         <motion.div className="inner-carousel" drag='x' dragConstraints={{ right: 0, left: -width }} style={{ display: "flex", flexDirection: "row" }}>
-          {flashcards.map((flashcard: { question: string; answer: string; }, index: React.Key | null | undefined) => (
+          {flashcards? flashcards.map((flashcard: { question: string; answer: string; }, index: React.Key | null | undefined) => (
             <FlipCard
               key={index}
               question={flashcard.question}
