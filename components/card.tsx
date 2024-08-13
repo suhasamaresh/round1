@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import FlipCard from "./flipcard";
 
 const FlipCardPage: React.FC = () => {
+  const [data , setData] = useState([]);
   const carousel = useRef<HTMLDivElement>(null);
   const cardWidth = 320; 
   const [flashcards, setFlashcards] = useState<{ question: string; answer: string }[]>([]);
@@ -14,6 +15,7 @@ const FlipCardPage: React.FC = () => {
       try {
         const response = await fetch("/api/flashcard");
         const data = await response.json();
+        setData(data);
         setFlashcards(data.flashcards);
       } catch (error) {
         console.error("Error fetching flashcards:", error);
@@ -55,7 +57,7 @@ const FlipCardPage: React.FC = () => {
     <div className='xl:ml-[200px] xl:mr-[200px] ml-10 mr-10 pb-20 lg:ml-[150px] lg:mr-[150px]'>
       <motion.div ref={carousel} className="carousel" style={{ overflow: "hidden", display: "flex" }}>
         <motion.div className="inner-carousel" drag='x' dragConstraints={{ right: 0, left: -width }} style={{ display: "flex", flexDirection: "row" }}>
-          {flashcards.map((flashcard, index) => (
+          {flashcards.map((flashcard: { question: string; answer: string; }, index: React.Key | null | undefined) => (
             <FlipCard
               key={index}
               question={flashcard.question}

@@ -99,39 +99,41 @@ const Dashboard: React.FC = () => {
     }
   };
 
+
+
   return (
-    <div className="h-full w-full p-8  bg-[#111a22] min-h-screen ">
-      <h1 className="text-3xl font-bold text-center mb-8 text-white">Flashcards Dashboard</h1>
+    <div className="h-screen w-screen p-8 bg-white">
+      <h1 className="text-3xl font-bold text-center  text-[#FF5733]">Flashcards Dashboard</h1>
+      <p className="text-xs text-orange-400 text-center mb-[10px]">
+           Click on a card to edit or delete it, or add new flashcards.
+      </p>
       <div className="flex flex-col items-end w-full">
-        <button
-          onClick={() => setAddDialogOpen(true)}
-          className="ml-0 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-all duration-300 mb-8 "
-        >
-          Add New Flashcard
-        </button>
+          <button
+            onClick={() => setAddDialogOpen(true)}
+            className="ml-0 p-2 bg-[#ff8906] text-white rounded-lg  ring-[1px] ring-transparent  hover:bg-white hover:text-[#ff8906] hover:ring-[#ff8906] transition-all duration-300 mb-8">
+            Add New Flashcard
+            </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-        {flashcards.map((flashcard) => (
-          <div key={flashcard.id} className="p-6 bg-[#111a22] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 relative border border-white">
-            <h2 className="text-xl font-semibold text-white mb-4">{flashcard.question}</h2>
-            <p className="text-white mb-6">{flashcard.answer}</p>
-            <div className="absolute top-2 right-2 flex space-x-2">
-              <button
-                onClick={() => handleEdit(flashcard.id)}
-                className="w-[30px] h-[15px] text-center text-xs bg-yellow-500 text-white rounded hover:bg-yellow-400"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(flashcard.id)}
-                className="w-[15px] h-[15px] text-center text-xs bg-red-500 text-white rounded-sm hover:bg-red-400"
-              >
-                X
-              </button>
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {flashcards && flashcards.length > 0 ? (
+  flashcards.map((flashcard) => (
+    <div key={flashcard.id} className="p-6 bg-[#FFDEAD] rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 relative" onClick={() => handleEdit(flashcard.id)}>
+      <h2 className="text-xl font-semibold text-[#FF5F1F] mb-4">{flashcard.question}</h2>
+      <p className="text-gray-600 mb-6">{flashcard.answer}</p>
+      <div className="absolute top-2 right-2 flex space-x-2">
+        <button
+          onClick={() => handleDelete(flashcard.id)}
+          className="w-[15px] h-[15px] text-center text-xs bg-red-500 text-white rounded-sm hover:bg-red-400"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  ))
+) : (
+  <p>No flashcards available</p>
+)}
       </div>
 
       {/* Add Dialog */}
@@ -145,24 +147,23 @@ const Dashboard: React.FC = () => {
               X
             </button>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Add New Flashcard</h2>
-            <input
-              type="text"
-              placeholder="Question"
-              value={newCard.question}
-              onChange={(e) => setNewCard({ ...newCard, question: e.target.value })}
-              className="w-full p-2 mb-4 border text-black border-gray-300 rounded"
+            <input 
+              type="text" 
+              placeholder="Question" 
+              value={newCard.question} 
+              onChange={(e) => setNewCard({ ...newCard, question: e.target.value })} 
+              className="w-full p-2 mb-4 border text-black border-gray-300 rounded" 
             />
-            <input
-              type="text"
-              placeholder="Answer"
-              value={newCard.answer}
-              onChange={(e) => setNewCard({ ...newCard, answer: e.target.value })}
-              className="w-full p-2 mb-4 border text-black border-gray-300 rounded"
+            <input 
+              type="text" 
+              placeholder="Answer" 
+              value={newCard.answer} 
+              onChange={(e) => setNewCard({ ...newCard, answer: e.target.value })} 
+              className="w-full p-2 mb-4 border text-black border-gray-300 rounded" 
             />
-            <button
-              onClick={handleAdd}
-              className="w-full p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-all duration-300"
-            >
+            <button 
+              onClick={handleAdd} 
+              className="ml-0 p-2 bg-[#ff8906] justi text-white rounded-lg  ring-[1px] ring-transparent  hover:bg-white hover:text-[#ff8906] hover:ring-[#ff8906] transition-all duration-300 mb-8">
               Add Flashcard
             </button>
           </div>
@@ -180,22 +181,22 @@ const Dashboard: React.FC = () => {
               X
             </button>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Edit Flashcard</h2>
-            <input
-              type="text"
-              placeholder="Question"
-              value={editingCard.question}
-              onChange={(e) => setEditingCard({ ...editingCard, question: e.target.value })}
-              className="w-full p-2 mb-4 border text-black border-gray-300 rounded"
+            <input 
+              type="text" 
+              placeholder="Question" 
+              value={editingCard.question} 
+              onChange={(e) => setEditingCard({ ...editingCard, question: e.target.value })} 
+              className="w-full p-2 mb-4 border text-black border-gray-300 rounded" 
             />
-            <input
-              type="text"
-              placeholder="Answer"
-              value={editingCard.answer}
-              onChange={(e) => setEditingCard({ ...editingCard, answer: e.target.value })}
-              className="w-full p-2 mb-4 border text-black border-gray-300 rounded"
+            <input 
+              type="text" 
+              placeholder="Answer" 
+              value={editingCard.answer} 
+              onChange={(e) => setEditingCard({ ...editingCard, answer: e.target.value })} 
+              className="w-full p-2 mb-4 border text-black border-gray-300 rounded" 
             />
-            <button
-              onClick={handleUpdate}
+            <button 
+              onClick={handleUpdate} 
               className="w-full p-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 transition-all duration-300"
             >
               Update Flashcard
